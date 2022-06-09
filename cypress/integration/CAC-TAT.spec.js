@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+
+
 describe('Central de Atendimento ao Cliente TAT', function() {
     beforeEach(function() {
         cy.visit('./src/index.html')
@@ -35,15 +37,39 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#phone')
             .type('sadasdasd')
             .should('have.value','')
-
     })
 
-    it.only('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
+        cy.get('#firstName').type('Juliano')
+        cy.get('#lastName').type('Reis')
+        cy.get('#email').type('julianokoslowisk@gmail.com')
+        cy.get('#phone-checkbox').click()
+        cy.get('#open-text-area').type('Teste')
+        cy.get('button[type="submit"]').click()
+
+        cy.get('.error').should('be.visible')
+    })
+
+    it.only('preenche e limpa os campos nome, sobrenome , email e telefone', function() {
+        cy.get('#firstName')
+          .type('Juliano')
+          .should('have.value', 'Juliano')
+          .clear()
+          .should('have.value', '')
+        cy.get('#lastName')
+            .type('Reis')
+            .should('have.value', 'Reis')
+            .clear()
+            .should('have.value', '')
+        cy.get('#email')
+          .type('julianokoslowisk@gmail.com')
+          .should('have.value', 'julianokoslowisk@gmail.com')
+          .clear()
+          .should('have.value', '')      
         cy.get('#phone')
-            .type('sadasdasd')
-            .should('have.value','')
-
-    })
-
-
+          .type('1234567890')
+          .should('have.value', '1234567890')
+          .clear()
+          .should('have.value', '')
+        })
 })
