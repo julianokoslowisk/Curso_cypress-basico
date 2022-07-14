@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-
+////npx cypress open
 
 
 describe('Central de Atendimento ao Cliente TAT', function() {
@@ -87,12 +87,19 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#product')
           .select('youtube')
           .should('have.value', 'youtube')
+        })
     
-    it.only('seleciona um produto (Mentoria)por seu valor (value)',function(){
+     it('seleciona um produto (Mentoria)por seu valor (value)',function(){
         cy.get('#product')
           .select('mentoria')
           .should('have.value', 'mentoria')
+      })
 
-     }) 
-        
- })
+      it('seleciona um produto (Blog )por seu indice)',function(){
+        cy.get('#product')
+          .select(1)
+          .should('have.value', 'blog')
+      })
+
+
+})
