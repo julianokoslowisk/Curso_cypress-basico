@@ -39,7 +39,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
       .should('have.value', '')
   })
 
-  it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
     cy.get('#firstName').type('Juliano')
     cy.get('#lastName').type('Reis')
     cy.get('#email').type('julianokoslowisk@gmail.com')
@@ -117,13 +117,22 @@ describe('Central de Atendimento ao Cliente TAT', function () {
       })
   })
 
-  it.only('Marca Ambos chekbox depois desmarca o ultimo ")', function () {
+  it('Marca Ambos chekbox depois desmarca o ultimo ")', function () {
     cy.get('input[type="checkbox"]')
       .check()
       .should('be.checked')
       .last()
       .uncheck()
       .should('not.be.checked')
+
   })
 
-})
+  it.only('Marca Ambos chekbox depois desmarca o ultimo ")', function () {
+    cy.get('input[type="file"] ')
+      .should('not.have.value')
+      .selectFile('./cypress/fixtures/example.json')
+      .should(function ($input) {
+        expect($input[0].files[0].name).to.equal('example.json')
+      })
+    })
+  })
