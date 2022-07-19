@@ -127,12 +127,30 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
   })
 
-  it.only('Marca Ambos chekbox depois desmarca o ultimo ")', function () {
+  it('seleciona um arquivo simulando um drag-and-drop', function () {
     cy.get('input[type="file"] ')
       .should('not.have.value')
-      .selectFile('./cypress/fixtures/example.json')
+      .selectFile('./cypress/fixtures/example.json' ,{ action: 'drag-drop' })
       .should(function ($input) {
         expect($input[0].files[0].name).to.equal('example.json')
       })
+  })
+})
+
+  it.only('seleciona um arquivo utilizando uma fixture para qual foi dada um alias', function () {
+  cy.fixture('example.json').as('sampleFile')
+  cy.get('input[type="file"]')
+    .selectFile('@sampleFile')
+    .should(function ($input) {
+      expect($input[0].files[0].name).to.equal('example.json')
     })
   })
+
+
+
+
+    
+   
+
+
+
