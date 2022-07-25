@@ -147,9 +147,19 @@ describe('Central de Atendimento ao Cliente TAT', function () {
      expect($input[0].files[0].name).to.equal('example.json')
    })
  }) 
-    it.only('Marca Ambos chekbox depois desmarca o ultimo ', function () { 
-      cy.get('#privacy a').should('have.attr','target','_blank')
+    it('Verifica que a politica de privacidade abre em outra aba sem necessidade de um clique ', function () { 
+      cy.get('#privacy a')
+      .should('have.attr','target','_blank')
     })
+
+    it.only('acessa página de polítia de privacidade remivendo o target e então clicando no link ', function () { 
+      cy.get('#privacy a')
+        .invoke('removeAttr','target')
+        .click()
+      cy.contains('Talking About Testing').should('be.visible')
+    })    
+
+    
 })
 
  
