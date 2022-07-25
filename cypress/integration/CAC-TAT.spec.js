@@ -5,6 +5,7 @@
 describe('Central de Atendimento ao Cliente TAT', function () {
   beforeEach(function () {
     cy.visit('./src/index.html')
+
   })
 
   it('verifica o título da aplicação', function () {
@@ -29,7 +30,6 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     cy.get('#email').type('julianokoslowisk@gmail,com')
     cy.get('#open-text-area').type('Teste')
     cy.contains('button', 'Enviar').click()
-
     cy.get('.error').should('be.visible')
 
   })
@@ -130,27 +130,36 @@ describe('Central de Atendimento ao Cliente TAT', function () {
   it('seleciona um arquivo simulando um drag-and-drop', function () {
     cy.get('input[type="file"] ')
       .should('not.have.value')
-      .selectFile('./cypress/fixtures/example.json' ,{ action: 'drag-drop' })
+      .selectFile('./cypress/fixtures/example.json', { action: 'drag-drop' })
       .should(function ($input) {
         expect($input[0].files[0].name).to.equal('example.json')
       })
+
   })
+  
+
+
+   it('seleciona um arquivo utilizando uma fixture para qual foi dada um alias', function () {
+ cy.fixture('example.json').as('sampleFile')
+ cy.get('input[type="file"]')
+   .selectFile('@sampleFile')
+   .should(function ($input) {
+     expect($input[0].files[0].name).to.equal('example.json')
+   })
+ }) 
+    it.only('Marca Ambos chekbox depois desmarca o ultimo ', function () { 
+      cy.get('#privacy a').should('have.attr','target','_blank')
+    })
 })
 
-  it.only('seleciona um arquivo utilizando uma fixture para qual foi dada um alias', function () {
-  cy.fixture('example.json').as('sampleFile')
-  cy.get('input[type="file"]')
-    .selectFile('@sampleFile')
-    .should(function ($input) {
-      expect($input[0].files[0].name).to.equal('example.json')
-    })
-  })
+ 
 
 
 
 
-    
-   
+
+
+
 
 
 
