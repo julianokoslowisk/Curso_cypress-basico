@@ -213,9 +213,9 @@ describe('Central de Atendimento ao Cliente TAT', function () {
       cy.get('#title')
         .invoke('text' , 'CAT TAT')
       cy.get('#subtitle')
-        .invoke('text' , 'Eu ❤️gatos')
-                      
+        .invoke('text' , 'Eu ❤️gatos')                      
     })
+    
 })
 
 
