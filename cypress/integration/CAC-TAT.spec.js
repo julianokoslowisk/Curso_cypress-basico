@@ -157,7 +157,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         .click()
       cy.contains('Talking About Testing').should('be.visible')
     }) 
-    
+        
 })
 
  
