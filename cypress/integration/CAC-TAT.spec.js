@@ -24,7 +24,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
   })
 
-  it.only('exibe mensagem de erro ao submeter o formulário emmail formatação errada', function () {
+  it('exibe mensagem de erro ao submeter o formulário emmail formatação errada', function () {
     cy.get('#firstName').type('Juliano')
     cy.get('#lastName').type('Reis')
     cy.get('#email').type('julianokoslowisk@gmail,com')
